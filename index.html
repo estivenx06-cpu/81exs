@@ -3,107 +3,85 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>81EXS</title>
 <style>
 *{box-sizing:border-box}
 body{
- margin:0;background:#071329;color:white;
+ margin:0;background:#f5f7fb;color:#182338;
  font-family:Arial,sans-serif;
- display:flex;justify-content:center;
- align-items:center;min-height:100vh;
 }
-.container{
- width:90%;max-width:380px;
- text-align:center;padding:30px 22px;
- background:#101f39;border-radius:18px;
+header{
+ height:65px;background:#fff;
+ display:flex;align-items:center;
+ padding:0 20px;gap:12px;
+ box-shadow:0 2px 8px #0001;
 }
 .logo{
- width:85px;height:85px;border-radius:50%;
- background:#1677ff;margin:0 auto 20px;
- display:flex;align-items:center;
- justify-content:center;font-size:40px;
+ width:38px;height:38px;border-radius:50%;
+ background:#1677ee;color:white;
+ display:grid;place-items:center;font-size:23px;
 }
-h1{margin-bottom:8px}
-p{color:#aebed5}
+.brand{font-size:23px;font-weight:bold}
+main{
+ max-width:430px;margin:55px auto;
+ padding:25px;
+}
+h2{text-align:center;font-size:27px}
+.subtitle{text-align:center;color:#8290a5}
+.tabs{display:flex;margin:30px 0 20px}
+.tab{
+ flex:1;padding:13px;border:0;
+ background:#e9eef6;font-size:16px;
+}
+.tab.active{background:#1677ee;color:white}
 input{
- width:100%;padding:15px;margin:9px 0;
- border:1px solid #30435f;border-radius:9px;
- background:#071329;color:white;font-size:16px;
+ width:100%;padding:16px;margin:9px 0;
+ border:1px solid #dce3ed;border-radius:7px;
+ font-size:16px;
 }
-button{
- width:100%;padding:15px;margin-top:12px;
- border:0;border-radius:9px;
- background:#1677ff;color:white;
+button.submit{
+ width:100%;padding:16px;margin-top:18px;
+ background:#1677ee;color:white;
+ border:0;border-radius:7px;
  font-size:16px;font-weight:bold;
 }
-.secondary{background:#263b5b}
-.hidden{display:none}
-a{color:#67a6ff}
+footer{text-align:center;color:#929eb0;font-size:12px}
 </style>
 </head>
 <body>
-<div class="container">
+<header>
  <div class="logo">✉</div>
- <h1>81EXS</h1>
- <p>Bienvenido a nuestra plataforma</p>
+ <div class="brand">81EXS</div>
+</header>
+<main>
+ <h2>Bienvenido a 81EXS</h2>
+ <p class="subtitle">Accede a tu cuenta o crea una nueva</p>
+
+ <div class="tabs">
+  <button class="tab active" id="loginTab" onclick="show('login')">Iniciar sesión</button>
+  <button class="tab" id="registerTab" onclick="show('register')">Registrarse</button>
+ </div>
 
  <section id="login">
-  <input id="loginUser" placeholder="Usuario" autocomplete="username">
-  <input id="loginPass" type="password" placeholder="Contraseña" autocomplete="current-password">
-  <button onclick="login()">INICIAR SESIÓN</button>
-  <button class="secondary" onclick="showRegister()">REGISTRARSE</button>
+  <input placeholder="Nombre de usuario" autocomplete="username">
+  <input type="password" placeholder="Contraseña" autocomplete="current-password">
+  <button class="submit" onclick="alert('La autenticación segura se configurará en el siguiente paso.')">INICIAR SESIÓN</button>
  </section>
 
- <section id="register" class="hidden">
-  <input id="newUser" placeholder="Crear usuario" autocomplete="username">
-  <input id="newPass" type="password" placeholder="Crear contraseña" autocomplete="new-password">
-  <button onclick="register()">CREAR CUENTA</button>
-  <button class="secondary" onclick="showLogin()">VOLVER</button>
+ <section id="register" hidden>
+  <input placeholder="Crear nombre de usuario" autocomplete="username">
+  <input type="password" placeholder="Crear contraseña" autocomplete="new-password">
+  <button class="submit" onclick="alert('El registro seguro se configurará en el siguiente paso.')">CREAR CUENTA</button>
  </section>
-
- <p id="message"></p>
- <a href="https://wa.me/50363052304" target="_blank">Contactar soporte</a>
-</div>
-
+</main>
+<footer>81EXS · Plataforma independiente</footer>
 <script>
-function showRegister(){
- loginSection(false);
- document.getElementById('register').classList.remove('hidden');
-}
-function showLogin(){
- document.getElementById('register').classList.add('hidden');
- loginSection(true);
-}
-function loginSection(show){
- document.getElementById('login').classList.toggle('hidden',!show);
-}
-function register(){
- const user=document.getElementById('newUser').value.trim();
- const pass=document.getElementById('newPass').value;
- if(user.length<3 || pass.length<8){
-  message('Usa un usuario de 3 caracteres y contraseña de 8 o más.');
-  return;
- }
- let users=JSON.parse(localStorage.getItem('81exs_users')||'{}');
- if(users[user]){message('Ese usuario ya existe.');return;}
- users[user]=pass;
- localStorage.setItem('81exs_users',JSON.stringify(users));
- message('Cuenta creada en este dispositivo. Ya puedes iniciar sesión.');
- showLogin();
-}
-function login(){
- const user=document.getElementById('loginUser').value.trim();
- const pass=document.getElementById('loginPass').value;
- const users=JSON.parse(localStorage.getItem('81exs_users')||'{}');
- if(users[user]===pass){
-  message('Sesión iniciada correctamente.');
- }else{
-  message('Usuario o contraseña incorrectos.');
- }
-}
-function message(text){
- document.getElementById('message').textContent=text;
+function show(page){
+ document.getElementById('login').hidden=page!=='login';
+ document.getElementById('register').hidden=page!=='register';
+ document.getElementById('loginTab').classList.toggle('active',page==='login');
+ document.getElementById('registerTab').classList.toggle('active',page==='register');
 }
 </script>
 </body>
