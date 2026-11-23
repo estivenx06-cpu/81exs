@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,47 +6,105 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>81EXS</title>
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #071329;
-  color: white;
-  text-align: center;
+*{box-sizing:border-box}
+body{
+ margin:0;background:#071329;color:white;
+ font-family:Arial,sans-serif;
+ display:flex;justify-content:center;
+ align-items:center;min-height:100vh;
 }
-.logo {
-  margin: 65px auto 20px;
-  width: 85px;
-  height: 85px;
-  border-radius: 50%;
-  background: #1677ff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 42px;
+.container{
+ width:90%;max-width:380px;
+ text-align:center;padding:30px 22px;
+ background:#101f39;border-radius:18px;
 }
-h1 { font-size: 34px; }
-p { color: #c4d0e4; }
-.contact {
-  display: inline-block;
-  margin-top: 35px;
-  padding: 16px 35px;
-  background: #1677ff;
-  color: white;
-  text-decoration: none;
-  border-radius: 10px;
-  font-weight: bold;
+.logo{
+ width:85px;height:85px;border-radius:50%;
+ background:#1677ff;margin:0 auto 20px;
+ display:flex;align-items:center;
+ justify-content:center;font-size:40px;
 }
+h1{margin-bottom:8px}
+p{color:#aebed5}
+input{
+ width:100%;padding:15px;margin:9px 0;
+ border:1px solid #30435f;border-radius:9px;
+ background:#071329;color:white;font-size:16px;
+}
+button{
+ width:100%;padding:15px;margin-top:12px;
+ border:0;border-radius:9px;
+ background:#1677ff;color:white;
+ font-size:16px;font-weight:bold;
+}
+.secondary{background:#263b5b}
+.hidden{display:none}
+a{color:#67a6ff}
 </style>
 </head>
 <body>
-<div class="logo">✉</div>
-<h1>81EXS</h1>
-<p>Bienvenido a nuestra plataforma</p>
-<p>¿Necesitas ayuda? Contáctanos.</p>
-<a class="contact"
-href="https://wa.me/50363052304"
-target="_blank">
-CONTACTAR
-</a>
+<div class="container">
+ <div class="logo">✉</div>
+ <h1>81EXS</h1>
+ <p>Bienvenido a nuestra plataforma</p>
+
+ <section id="login">
+  <input id="loginUser" placeholder="Usuario" autocomplete="username">
+  <input id="loginPass" type="password" placeholder="Contraseña" autocomplete="current-password">
+  <button onclick="login()">INICIAR SESIÓN</button>
+  <button class="secondary" onclick="showRegister()">REGISTRARSE</button>
+ </section>
+
+ <section id="register" class="hidden">
+  <input id="newUser" placeholder="Crear usuario" autocomplete="username">
+  <input id="newPass" type="password" placeholder="Crear contraseña" autocomplete="new-password">
+  <button onclick="register()">CREAR CUENTA</button>
+  <button class="secondary" onclick="showLogin()">VOLVER</button>
+ </section>
+
+ <p id="message"></p>
+ <a href="https://wa.me/50363052304" target="_blank">Contactar soporte</a>
+</div>
+
+<script>
+function showRegister(){
+ loginSection(false);
+ document.getElementById('register').classList.remove('hidden');
+}
+function showLogin(){
+ document.getElementById('register').classList.add('hidden');
+ loginSection(true);
+}
+function loginSection(show){
+ document.getElementById('login').classList.toggle('hidden',!show);
+}
+function register(){
+ const user=document.getElementById('newUser').value.trim();
+ const pass=document.getElementById('newPass').value;
+ if(user.length<3 || pass.length<8){
+  message('Usa un usuario de 3 caracteres y contraseña de 8 o más.');
+  return;
+ }
+ let users=JSON.parse(localStorage.getItem('81exs_users')||'{}');
+ if(users[user]){message('Ese usuario ya existe.');return;}
+ users[user]=pass;
+ localStorage.setItem('81exs_users',JSON.stringify(users));
+ message('Cuenta creada en este dispositivo. Ya puedes iniciar sesión.');
+ showLogin();
+}
+function login(){
+ const user=document.getElementById('loginUser').value.trim();
+ const pass=document.getElementById('loginPass').value;
+ const users=JSON.parse(localStorage.getItem('81exs_users')||'{}');
+ if(users[user]===pass){
+  message('Sesión iniciada correctamente.');
+ }else{
+  message('Usuario o contraseña incorrectos.');
+ }
+}
+function message(text){
+ document.getElementById('message').textContent=text;
+}
+</script>
 </body>
 </html>
