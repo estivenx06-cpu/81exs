@@ -23,6 +23,36 @@ footer{text-align:center;padding:30px;color:#8092ad;font-size:13px}
 @media(max-width:720px){.hero{grid-template-columns:1fr}.stats{grid-template-columns:1fr}}
 </style>
 </head>
+<style>
+.chat-button {
+  position: fixed;
+  bottom: 22px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #087cff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 12px #0004;
+  z-index: 9999;
+}
+.chat-button svg {
+  width: 30px;
+  height: 30px;
+  fill: white;
+}
+</style>
+
+<a class="chat-button"
+   href="https://wa.me/50363052304"
+   aria-label="Contactar">
+  <svg viewBox="0 0 24 24">
+    <path d="M4 4h16v12H9l-5 4V4z"/>
+  </svg>
+</a>
+
 <body>
 <header><div class="logo">81<span>EXS</span></div><a class="btn" href="#acceso">Ingresar</a></header>
 <main>
