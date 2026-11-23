@@ -1,135 +1,53 @@
-<!doctype html>
+
+
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>81EXS | Plataforma demo</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>81EXS</title>
 <style>
-:root{--bg:#0b1220;--panel:#121d30;--line:#263650;--text:#edf3ff;--muted:#9fb0ca;--blue:#3b82f6;--cyan:#22d3ee}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#08111f,#111e33);color:var(--text);font:16px system-ui,Arial,sans-serif;min-height:100vh}
-header{display:flex;justify-content:space-between;align-items:center;padding:18px max(5vw,20px);border-bottom:1px solid var(--line);background:#0b1424}
-.logo{font-weight:900;letter-spacing:2px;font-size:22px}.logo span{color:var(--cyan)}
-button,.btn{border:0;border-radius:10px;padding:12px 18px;background:var(--blue);color:white;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block}
-button.secondary{background:#253650}main{max-width:1050px;margin:45px auto;padding:0 20px}
-.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:center}
-h1{font-size:clamp(34px,6vw,58px);line-height:1.05;margin:0 0 18px}.accent{color:var(--cyan)}
-p{color:var(--muted);line-height:1.65}.panel{background:rgba(18,29,48,.96);border:1px solid var(--line);border-radius:18px;padding:25px;box-shadow:0 18px 55px #0005}
-label{display:block;color:#cbd8eb;font-size:14px;margin:14px 0 7px}input{width:100%;padding:13px;border-radius:9px;border:1px solid var(--line);background:#0a1424;color:white;font-size:16px}
-small{color:var(--muted)}.notice{border-left:3px solid var(--cyan);padding:10px 13px;background:#0c2535;border-radius:6px;color:#c5eefa;font-size:13px;margin:15px 0}
-.hidden{display:none!important}.topline{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0}.stat{padding:18px;background:#0c1728;border:1px solid var(--line);border-radius:12px}.stat b{font-size:26px;display:block}
-table{width:100%;border-collapse:collapse;margin-top:15px}td,th{text-align:left;padding:12px;border-bottom:1px solid var(--line);font-size:14px}th{color:#a9bad3}
-footer{text-align:center;padding:30px;color:#8092ad;font-size:13px}
-@media(max-width:720px){.hero{grid-template-columns:1fr}.stats{grid-template-columns:1fr}}
-</style>
-</head>
-<style>
-.chat-button {
-  position: fixed;
-  bottom: 22px;
-  right: 20px;
-  width: 60px;
-  height: 60px;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #071329;
+  color: white;
+  text-align: center;
+}
+.logo {
+  margin: 65px auto 20px;
+  width: 85px;
+  height: 85px;
   border-radius: 50%;
-  background: #087cff;
+  background: #1677ff;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 3px 12px #0004;
-  z-index: 9999;
+  font-size: 42px;
 }
-.chat-button svg {
-  width: 30px;
-  height: 30px;
-  fill: white;
+h1 { font-size: 34px; }
+p { color: #c4d0e4; }
+.contact {
+  display: inline-block;
+  margin-top: 35px;
+  padding: 16px 35px;
+  background: #1677ff;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: bold;
 }
 </style>
-
-<a class="chat-button"
-   href="https://wa.me/50363052304"
-   aria-label="Contactar">
-  <svg viewBox="0 0 24 24">
-    <path d="M4 4h16v12H9l-5 4V4z"/>
-  </svg>
-</a>
-
+</head>
 <body>
-<header><div class="logo">81<span>EXS</span></div><a class="btn" href="#acceso">Ingresar</a></header>
-<main>
-<section id="inicio" class="hero">
- <div><p class="accent"><b>PLATAFORMA DE DEMOSTRACIÓN</b></p>
- <h1>Un espacio digital <span class="accent">bajo tu control.</span></h1>
- <p>Prototipo independiente para probar una pantalla de acceso, un panel administrativo y solicitudes de contacto. No está afiliado ni imita el sitio de ninguna otra empresa.</p>
- <a class="btn" href="#acceso">Comenzar</a></div>
- <div class="panel" id="acceso">
-  <h2>Iniciar sesión de prueba</h2>
-  <p>Usa cualquier nombre de usuario y una clave ficticia. La clave se utiliza solo para simular el acceso y nunca se guarda ni se muestra al administrador.</p>
-  <form id="loginForm">
-   <label for="username">Usuario de prueba</label><input id="username" autocomplete="off" required maxlength="40" placeholder="Escribe un nombre">
-   <label for="password">Clave ficticia</label><input id="password" type="password" required placeholder="No uses tu contraseña real">
-   <div class="notice">Demo: no ingreses contraseñas reales ni datos personales sensibles.</div>
-   <button type="submit" style="width:100%">Entrar a la demostración</button>
-  </form>
-  <p id="loginMsg" role="status"></p>
- </div>
-</section>
-
-<section id="dashboard" class="hidden" style="margin-top:35px">
- <div class="panel">
-  <div class="topline"><div><p class="accent"><b>ADMINISTRACIÓN LOCAL</b></p><h2>Panel de control</h2><p>Sesión de demostración iniciada como <b id="activeUser"></b>.</p></div><button class="secondary" id="logout">Cerrar sesión</button></div>
-  <div class="stats"><div class="stat"><small>Sesiones registradas en este navegador</small><b id="count">0</b></div><div class="stat"><small>Contraseñas almacenadas</small><b>0</b></div><div class="stat"><small>Estado</small><b class="accent">Demo</b></div></div>
-  <h3>Actividad de prueba</h3>
-  <p>Se registra únicamente el nombre de usuario de demostración y la hora local. Nunca se registra la clave.</p>
-  <div style="overflow-x:auto"><table><thead><tr><th>Usuario demo</th><th>Fecha y hora</th><th>Tipo</th></tr></thead><tbody id="activity"></tbody></table></div>
-  <button class="secondary" id="clearLog" style="margin-top:16px">Borrar actividad local</button>
- </div>
-</section>
-
-<section class="panel" style="margin-top:35px">
- <h2>¿Necesitas contactar al administrador?</h2>
- <p>Este botón abre WhatsApp sin publicar tu número en la página. Configura el número del administrador en el código antes de publicar.</p>
- <a class="btn" id="contactBtn" href="#" target="_blank" rel="noopener">Contactar por WhatsApp</a>
- <small style="display:block;margin-top:10px">El número debe configurarse en la constante ADMIN_WHATSAPP del archivo.</small>
-</section>
-</main>
-<footer>81EXS · Prototipo independiente de demostración · No recopila contraseñas</footer>
-<script>
-/* Sustituye el texto vacío por tu número internacional, solo dígitos.
-   Ejemplo de formato: 503XXXXXXXX. No incluyas el signo +. */
-const ADMIN_WHATSAPP = "";
-const KEY = "81exs_demo_activity";
-const $ = id => document.getElementById(id);
-function readLog(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return []}}
-function render(){
- const rows=readLog(); $("count").textContent=rows.length;
- $("activity").innerHTML="";
- rows.slice().reverse().forEach(item=>{
-  const tr=document.createElement("tr");
-  [item.user,item.time,"Inicio de sesión demo"].forEach(value=>{
-   const td=document.createElement("td");td.textContent=value;tr.appendChild(td);
-  });
-  $("activity").appendChild(tr);
- });
-}
-$("loginForm").addEventListener("submit",e=>{
- e.preventDefault();
- const user=$("username").value.trim();
- const pass=$("password").value;
- if(!user||!pass)return;
- // La clave solo se comprueba como campo requerido y se descarta inmediatamente.
- $("password").value="";
- const rows=readLog();rows.push({user:user.slice(0,40),time:new Date().toLocaleString()});
- localStorage.setItem(KEY,JSON.stringify(rows.slice(-100)));
- $("activeUser").textContent=user;
- $("dashboard").classList.remove("hidden");
- $("loginMsg").textContent="Acceso de demostración correcto.";
- render();$("dashboard").scrollIntoView({behavior:"smooth"});
-});
-$("logout").addEventListener("click",()=>{$("dashboard").classList.add("hidden");$("loginMsg").textContent="Sesión cerrada.";});
-$("clearLog").addEventListener("click",()=>{localStorage.removeItem(KEY);render();});
-$("contactBtn").addEventListener("click",e=>{
- if(!ADMIN_WHATSAPP){e.preventDefault();alert("Configura ADMIN_WHATSAPP en el archivo antes de publicar.");return;}
- $("contactBtn").href="https://wa.me/"+ADMIN_WHATSAPP;
-});
-</script>
-</body></html>
+<div class="logo">✉</div>
+<h1>81EXS</h1>
+<p>Bienvenido a nuestra plataforma</p>
+<p>¿Necesitas ayuda? Contáctanos.</p>
+<a class="contact"
+href="https://wa.me/50363052304"
+target="_blank">
+CONTACTAR
+</a>
+</body>
+</html>
